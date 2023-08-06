@@ -18,9 +18,7 @@ export default function Home() {
        
 
         <div className={styles.center}>
-          <p>
             <h1>Hello Odisea</h1>
-          </p>
         </div>
 
         
