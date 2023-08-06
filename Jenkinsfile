@@ -10,13 +10,13 @@ pipeline {
             url: '${REPO_URL}'
             }
         }
-        }
-    stages {
-        stage('Build') {
+         stage('Build') {
             steps {
                 sh 'npm install'
             }
         }
       
-    }
+        }
+       
+    
 }
