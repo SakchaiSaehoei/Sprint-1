@@ -5,7 +5,7 @@ FROM node:14 AS builder
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the container
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
 # Install app dependencies
 RUN npm install
@@ -14,8 +14,8 @@ RUN npm install
 COPY . .
 
 # Build the Next.js app for production
-# RUN npm run build
+RUN npm run build
 
-EXPOSE 3001
+EXPOSE 49153
 
 CMD ["node", "src/pages/index.js"]
