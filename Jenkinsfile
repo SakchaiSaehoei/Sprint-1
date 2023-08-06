@@ -10,6 +10,7 @@ pipeline {
             url: '${REPO_URL}'
             }
         }
+        }
     stages {
         stage('Build') {
             steps {
