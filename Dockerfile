@@ -1,10 +1,12 @@
+# https://www.youtube.com/watch?v=dtLpWR98HfE&t=2s
 # Stage 1 : Build the Next.js app
-FROM node:14 AS builder
-
+FROM node:latest
+# RUN mkdir -p /home/app/ && chown -R node:node/home/app
 # Set the working directory in the container
 WORKDIR /app
-
+# COPY --chown=node:node . .
 # Copy package.json and package-lock.json to the container
+# USER node
 COPY package*.json ./
 
 # Install app dependencies
@@ -18,4 +20,5 @@ RUN npm run build
 
 EXPOSE 49153
 
-CMD ["node", "src/pages/index.js"]
+CMD ["npm", "run", "dev"]
+# CMD ["yarn", "start"]
