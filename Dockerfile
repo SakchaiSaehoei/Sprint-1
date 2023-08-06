@@ -16,6 +16,6 @@ COPY . .
 # Build the Next.js app for production
 # RUN npm run build
 
-EXPOSE 3000
+EXPOSE 3001
 
 CMD ["node", "index.js"]
