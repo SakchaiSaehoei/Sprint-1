@@ -1,7 +1,10 @@
 pipeline {
     agent any
-    tools {
-        nodejs '20.5.0'
+    // tools {
+    //     nodejs '20.5.0'
+    // }
+    options {
+        skipDefaultCheckout(true)
     }
     stages {
         stage('Clone git') {
