@@ -18,8 +18,7 @@ pipeline {
                 sh 'npm install'
             }
         }
-<<<<<<< HEAD
-=======
+
         stage('SonarQube Analysis') {
             steps {
                 script {
@@ -34,7 +33,6 @@ pipeline {
                 }
         }
         }
->>>>>>> odsiea-poc-client-sast-sonarqube-pipeline
         stage('Build Image') {
             steps {
                 sh 'docker build -t ${DOCKER_REG_URL}/${DOCKER_REG_NAME}/${APP_NAME}:${BUILD_NUMBER} $WORKSPACE/ '
