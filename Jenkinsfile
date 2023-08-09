@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     //  tool name of sonarQube scanner is in daskboard/Global tool congiuration -> sonarscanner in jenkins
-                    def scannerHome = tool name: 'SonarQube'
+                    def scannerHome = tool name: 'SonarQubeScanner'
                     // withSonarQubeEnv enter name of sonarQube server in jenkins
                     withSonarQubeEnv('SonarQube') {
                         sh "${scannerHome}/bin/sonar-scanner \
