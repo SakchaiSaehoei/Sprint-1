@@ -18,6 +18,16 @@ pipeline {
                 sh 'npm install'
             }
         }
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def scannerHome = tool name: 'SonarQubeScanner 4.0'
+                    withSonarQubeEnv('My SonarQube Server') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
+        }
+        }
         stage('Build Image') {
             steps {
                 sh 'docker build -t ${DOCKER_REG_URL}/${DOCKER_REG_NAME}/${APP_NAME}:${BUILD_NUMBER} $WORKSPACE/ '
@@ -43,16 +53,7 @@ pipeline {
                 sh 'docker rmi ${DOCKER_REG_URL}/${DOCKER_REG_NAME}/${APP_NAME}:${BUILD_NUMBER}'
             }
         }
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    def scannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                    withSonarQubeEnv('My SonarQube Server') {
-                        sh "${scannerHome}/bin/sonar-scanner"
-                    }
-                }
-        }
-        }
+       
        
     
 }
