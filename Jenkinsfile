@@ -22,8 +22,10 @@ pipeline {
             steps {
                 script {
                     def scannerHome = tool name: 'SonarQubeScanner'
-                    withSonarQubeEnv('My SonarQube Server') {
-                        sh "${scannerHome}/bin/sonar-scanner"
+                    withSonarQubeEnv('SonarQube') {
+                        sh "${scannerHome}/bin/sonar-scanner" \
+                        -Dsonar.projectKey=odisea-poc-client-sast-sonarqube-pipeline \
+                        -Dsonar.projectName=odisea-poc-client-sast-sonarqube-pipeline
                     }
                 }
         }
