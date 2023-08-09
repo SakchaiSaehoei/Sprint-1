@@ -21,7 +21,9 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    def scannerHome = tool name: 'SonarQubeScanner'
+                    //  tool name of sonarQube scanner is in daskboard/Global tool congiuration -> sonarscanner in jenkins
+                    def scannerHome = tool name: 'SonarQube'
+                    // withSonarQubeEnv enter name of sonarQube server in jenkins
                     withSonarQubeEnv('SonarQube') {
                         sh "${scannerHome}/bin/sonar-scanner" \
                         -Dsonar.projectKey=odisea-poc-client-sast-sonarqube-pipeline \
