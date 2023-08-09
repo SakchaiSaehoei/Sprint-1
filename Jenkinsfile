@@ -26,10 +26,11 @@ pipeline {
                     def scannerHome = tool name: 'SonarQubeScanner'
                     // withSonarQubeEnv enter name of sonarQube server in jenkins
                     withSonarQubeEnv('SonarQube') {
-                        sh "${scannerHome}/bin/sonar-scanner \
-                        Dsonar.login=${SONAR_TOKEN} \
+                        sh "${scannerHome}/bin/sonar-scanner -X \
+                        
                         -Dsonar.projectKey=odisea-poc-client-sast-sonarqube-pipeline \
                         -Dsonar.projectName=odisea-poc-client-sast-sonarqube-pipeline "
+                        // Dsonar.login=${SONAR_TOKEN} \
                     }
                 }
         }
