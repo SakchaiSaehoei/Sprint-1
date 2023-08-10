@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    // tools {
-    //     nodejs '20.5.0'
-    // }
     options {
         skipDefaultCheckout(true)
     }
