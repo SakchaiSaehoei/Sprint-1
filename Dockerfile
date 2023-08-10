@@ -16,7 +16,7 @@ RUN npm install
 COPY . .
 
 # Build the Next.js app for production
-RUN npm run build
+# RUN npm run build
 
 EXPOSE 49153
 
