@@ -18,22 +18,34 @@ pipeline {
                 sh 'npm install'
             }
         }
-
-        stage('SonarQube Analysis') {
+        
+        stage('OWASP Dependency-Check Vulnerabilities') {
             steps {
-                script {
-                    //  tool name of sonarQube scanner is in daskboard/Global tool congiuration -> sonarscanner in jenkins
-                    def scannerHome = tool name: 'SonarQubeScanner'
-                    // withSonarQubeEnv enter name of sonarQube server in jenkins
-                    withSonarQubeEnv('sonarqube-odisea-poc-client-sast-sonarqube-pipeline') {
-                        sh "${scannerHome}/bin/sonar-scanner  \
-                        -Dsonar.projectKey=odisea-poc-client-sast-sonarqube-pipeline \
-                        -Dsonar.projectName=odisea-poc-client-sast-sonarqube-pipeline "
-                        // Dsonar.login=${SONAR_TOKEN} \
-                    }
-                }
+                dependencyCheck additionalArguments: ''' 
+                            -o './'
+                            -s './'
+                            -f 'ALL' 
+                            --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
+                
+                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+            }
         }
-        }
+
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         script {
+        //             //  tool name of sonarQube scanner is in daskboard/Global tool congiuration -> sonarscanner in jenkins
+        //             def scannerHome = tool name: 'SonarQubeScanner'
+        //             // withSonarQubeEnv enter name of sonarQube server in jenkins
+        //             withSonarQubeEnv('sonarqube-odisea-poc-client-sast-sonarqube-pipeline') {
+        //                 sh "${scannerHome}/bin/sonar-scanner  \
+        //                 -Dsonar.projectKey=odisea-poc-client-sast-sonarqube-pipeline \
+        //                 -Dsonar.projectName=odisea-poc-client-sast-sonarqube-pipeline "
+        //                 // Dsonar.login=${SONAR_TOKEN} \
+        //             }
+        //         }
+        // }
+        // }
         stage('Build Image') {
             steps {
                 sh 'docker build -t ${DOCKER_REG_URL}/${DOCKER_REG_NAME}/${APP_NAME}:${BUILD_NUMBER} $WORKSPACE/ '
