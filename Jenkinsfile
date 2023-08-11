@@ -45,6 +45,7 @@ pipeline {
                 ACR_SERVER = '${DOCKER_REG_URL}'
                 ACR_CREDENTIAL = 'acr-credentials'
             }
+        }
         steps{   
             script {
                 docker.withRegistry(  "http://${ACR_SERVER}", ACR_CREDENTIAL ) {
