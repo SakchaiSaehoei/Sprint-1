@@ -30,7 +30,7 @@ pipeline {
         //             }
         //         }
         // }
-        }
+        // }
         stage('Build Image') {
             steps {
                 sh 'docker build -t ${DOCKER_REG_URL}/${DOCKER_REG_NAME}/${APP_NAME}:${BUILD_NUMBER} $WORKSPACE/ '
@@ -40,6 +40,7 @@ pipeline {
       steps {
         sh 'trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL ${DOCKER_REG_URL}/${DOCKER_REG_NAME}/${APP_NAME}:${BUILD_NUMBER} $WORKSPACE/'
       }
+        }
         stage('Push Image to ACR') {
             environment {
                 ACR_SERVER = '${DOCKER_REG_URL}'
@@ -55,14 +56,9 @@ pipeline {
       }
      }
 
-         stage('Remove build image') {
-            steps {
-
-                sh 'docker rmi ${DOCKER_REG_URL}/${DOCKER_REG_NAME}/${APP_NAME}:${BUILD_NUMBER}'
-            }
-        }
+         
        
        
     
 }
-}
+
