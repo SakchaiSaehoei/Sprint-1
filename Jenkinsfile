@@ -3,6 +3,9 @@ pipeline {
     // tools {
     //     nodejs '20.5.0'
     // }
+    environment {
+        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+    }
     options {
         skipDefaultCheckout(true)
     }
