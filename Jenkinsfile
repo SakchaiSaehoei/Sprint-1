@@ -16,7 +16,7 @@ pipeline {
                 sh 'docker build -t ${DOCKER_REG_URL}/${DOCKER_REG_NAME}/${APP_NAME}:${BUILD_NUMBER} $WORKSPACE/ '
             }
         }
-        stage('Scan') {
+        stage('Container Security Scan') {
             steps {
             script{
         // sh 'trivy image ${DOCKER_REG_URL}/${DOCKER_REG_NAME}/${APP_NAME}:${BUILD_NUMBER} '
