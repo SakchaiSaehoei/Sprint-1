@@ -18,11 +18,13 @@ pipeline {
         }
         stage('Scan') {
             steps {
+            script{
         // sh 'trivy image ${DOCKER_REG_URL}/${DOCKER_REG_NAME}/${APP_NAME}:${BUILD_NUMBER} '
         // sh 'trivy image --no-progress --exit-code 1 --severity HIGH,CRITICAL ${DOCKER_REG_URL}/${DOCKER_REG_NAME}/${APP_NAME}:${BUILD_NUMBER} '
         def imageName = "${DOCKER_REG_URL}/${DOCKER_REG_NAME}/${APP_NAME}:${BUILD_NUMBER}"
         def reportFileName = "${DOCKER_REG_URL}_${DOCKER_REG_NAME}_${APP_NAME}_${BUILD_NUMBER}_trivy_report.html"
         sh """trivy image --format template --template \"@/home/trivy/contrib/html.tpl\" --output ${reportFileName} ${imageName}"""
+      }
       }
         }
         stage('Push Image to ACR') {
