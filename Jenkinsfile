@@ -13,11 +13,11 @@ pipeline {
             url: '${REPO_URL}'
             }
         }
-         stage('Build') {
-            steps {
-                sh 'npm install'
-            }
-        }
+        //  stage('Build') {
+        //     steps {
+        //         sh 'npm install'
+        //     }
+        // }
 
         stage('SonarQube Analysis') {
             steps {
