@@ -26,7 +26,7 @@ pipeline {
         stage('Push Image to ACR') {
             environment {
                 ACR_SERVER = '${DOCKER_REG_URL}'
-                ACR_CREDENTIAL = 'acr-credential'
+                ACR_CREDENTIAL = 'acr-credentials'
             }
         steps{   
             script {
