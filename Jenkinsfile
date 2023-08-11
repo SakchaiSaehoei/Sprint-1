@@ -10,11 +10,11 @@ pipeline {
             url: '${REPO_URL}'
             }
         }
-         stage('Build') {
-            steps {
-                sh 'npm install'
-            }
-        }
+        //  stage('Build') {
+        //     steps {
+        //         sh 'npm install'
+        //     }
+        // }
         
         stage('OWASP Dependency-Check Vulnerabilities') {
             steps {
