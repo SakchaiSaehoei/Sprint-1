@@ -23,6 +23,8 @@ pipeline {
             steps {
                 script {
                     //  tool name of sonarQube scanner is in daskboard/Global tool congiuration -> sonarscanner in jenkins
+                    sh "whoami"
+                    sh "pwd"
                     def scannerHome = tool name: 'SonarQubeScanner'
                     // withSonarQubeEnv enter name of sonarQube server in jenkins
                     withSonarQubeEnv('odisea-poc-client-sast-sonarqube-pipeline') {
