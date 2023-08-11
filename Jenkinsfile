@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    // tools {
-    //     nodejs '20.5.0'
-    // }
     options {
         skipDefaultCheckout(true)
     }
@@ -13,19 +10,13 @@ pipeline {
             url: '${REPO_URL}'
             }
         }
-         stage('Build') {
-            steps {
-                sh 'npm install'
-            }
-        }
-
         stage('SonarQube Analysis') {
             steps {
                 script {
                     //  tool name of sonarQube scanner is in daskboard/Global tool congiuration -> sonarscanner in jenkins
                     def scannerHome = tool name: 'SonarQubeScanner'
                     // withSonarQubeEnv enter name of sonarQube server in jenkins
-                    withSonarQubeEnv('sonarqube-odisea-poc-client-sast-sonarqube-pipeline') {
+                    withSonarQubeEnv('odisea-poc-client-sast-sonarqube-pipeline') {
                         sh "${scannerHome}/bin/sonar-scanner  \
                         -Dsonar.projectKey=odisea-poc-client-sast-sonarqube-pipeline \
                         -Dsonar.projectName=odisea-poc-client-sast-sonarqube-pipeline "
@@ -42,7 +33,7 @@ pipeline {
         stage('Push Image to ACR') {
             environment {
                 ACR_SERVER = '${DOCKER_REG_URL}'
-                ACR_CREDENTIAL = 'acr-credential'
+                ACR_CREDENTIAL = 'acr-credentials'
             }
         steps{   
             script {
